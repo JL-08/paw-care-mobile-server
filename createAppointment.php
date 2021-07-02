@@ -6,7 +6,8 @@ $json = json_decode(file_get_contents('php://input'), true);
 $user_id = $json["user"];
 $vet_id = $json["vet"];
 $pet_id = $json["pet"];
-$date = $json["date"];
+$start_date = $json["date"];
+$end_date = $json["end_date"];
 $type = $json["type"];
 $reason = $json["reason"];
 // $user_id = 10;
@@ -17,7 +18,7 @@ $reason = $json["reason"];
 // $type = 'online';
 // $reason = 'something';
 
-$sql = "SELECT * FROM appointments WHERE start_date = '$date'";
+$sql = "SELECT * FROM appointments WHERE start_date = '$start_date'";
 $result = $conn->query($sql);
 
 if ($result->num_rows == 0) {
@@ -25,8 +26,8 @@ if ($result->num_rows == 0) {
 	$newdate = new DateTime();
 	$current_date = $newdate->format('Y-m-d H:i:s');
 
-    $mysql_qry = "insert into appointments (user_id, vet_id, pet_id, start_date, type, reason, status, is_approved, is_completed, created_at) 
-	values ('$user_id','$vet_id','$pet_id','$date','$type', '$reason', 'pending', 0, 0, '$current_date')";
+    $mysql_qry = "insert into appointments (user_id, vet_id, pet_id, start_date, end_date, type, reason, status, is_approved, is_completed, created_at) 
+	values ('$user_id','$vet_id','$pet_id','$start_date', '$end_date','$type', '$reason', 'pending', 0, 0, '$current_date')";
 	
 	if($conn->query($mysql_qry) == TRUE){
 	    echo json_encode("You have successfully booked this appointment.");

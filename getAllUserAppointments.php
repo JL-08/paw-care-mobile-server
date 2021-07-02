@@ -7,17 +7,19 @@ $user_id = $json["user_id"];
 
 $data = array(); 
  
-$sql = "SELECT a.id, a.start_date, a.type, a.reason ,a.status, a.is_approved, a.is_completed, a.meeting_link, v.name, v.specialization, p.name
-        FROM appointments AS a JOIN veterenarians as v ON a.vet_id=v.id JOIN pets as p ON a.pet_id=p.id WHERE a.user_id = $user_id;";
+$sql = "SELECT a.id, a.start_date, a.end_date, a.type, a.reason ,a.status, a.is_approved, a.is_completed, a.meeting_link, v.name, v.specialization, p.name
+        FROM appointments AS a JOIN veterenarians as v ON a.vet_id=v.id JOIN pets as p ON a.pet_id=p.id WHERE a.user_id = $user_id
+        ORDER BY a.start_date DESC;";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-$stmt->bind_result($id, $start_date, $type, $reason, $status, $is_approved, $is_completed, $meeting_link, $vet_name, $vet_specialization, $pet_name);
+$stmt->bind_result($id, $start_date, $end_date, $type, $reason, $status, $is_approved, $is_completed, $meeting_link, $vet_name, $vet_specialization, $pet_name);
  
 while($stmt->fetch()){
  
  $temp = [
  'id'=>$id,
  'start_date'=>$start_date,
+ 'end_date'=>$end_date,
  'type'=>$type,
  'reason'=>$reason,
  'status'=>$status,
