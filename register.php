@@ -70,8 +70,8 @@ $conn->close();
 
 function sendMail($hash, $email) {
             include "phpmailer/PHPMailerAutoload.php";
-            $gmailUsername = "janellelacsamana@gmail.com"; //Gmail username to be use as sender(make sure that the gmail settings was ON or enable)
-            $gmailPassword = "Janelleacc123"; //Gmail Password used for the gmail 
+            $gmailUsername = "petsmalu.dev@gmail.com"; //Gmail username to be use as sender(make sure that the gmail settings was ON or enable)
+            $gmailPassword = "petsmalu123"; //Gmail Password used for the gmail 
 //////////////////////////////////////
             $mail = new PHPMailer();
             $mail->IsSMTP();
@@ -95,7 +95,7 @@ function sendMail($hash, $email) {
             $mail->Subject = "Verify Your Account"; //Email Subject: to get the subject from the form
             $mail->Body = "Welcome to Petsmalu. Your Petsmalu Account is almost ready. Please enter this code to activate your account: $hash"; //Content of Message : to get the content or body of the email from form
 
-            $mail->AddAddress("janellelacsamana@gmail.com"); //Recepient of email: to send whatever email you want to
+            $mail->AddAddress("petsmalu.dev@gmail.com"); //Recepient of email: to send whatever email you want to
 			$mail->Send();
 		}
 ?>
