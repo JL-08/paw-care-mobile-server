@@ -18,7 +18,15 @@ $reason = $json["reason"];
 // $type = 'online';
 // $reason = 'something';
 
-$sql = "SELECT * FROM appointments WHERE start_date = '$start_date'";
+// $startDate = date('Y-m-d', strtotime($start_date));
+// $startTime = date('H:i:s', strtotime($start_date));
+// $endDate = date('Y-m-d', strtotime($end_date));
+// $endTime = date('H:i:s', strtotime($end_date));
+
+$sql = "SELECT * FROM appointments WHERE ('$start_date' >= start_date AND '$start_date' <= end_date)
+		OR ('$end_date' >= start_date AND '$end_date' <= end_date)
+		OR ('$start_date' <= start_date AND '$end_date' >= end_date);";
+
 $result = $conn->query($sql);
 
 if ($result->num_rows == 0) {
