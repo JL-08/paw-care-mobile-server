@@ -13,7 +13,8 @@ $sql = "SELECT a.id, a.start_date, a.type, a.reason, a.status, a.meeting_link, u
         FROM appointments AS a
         JOIN users as u ON a.user_id=u.id
         JOIN pets as p ON a.pet_id=p.id
-        WHERE a.vet_id = $vet_id AND a.status='$status';";
+        WHERE a.vet_id = $vet_id AND a.status='$status'
+        ORDER BY a.start_date DESC;";
 
 $stmt = $conn->prepare($sql);
 $stmt->execute();
